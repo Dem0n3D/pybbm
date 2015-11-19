@@ -1,5 +1,6 @@
 {% load url from future %}
 {% load i18n pybb_tags %}
+{% load staticfiles %}
 <form class="post-form" action="
     {% if forum %}
         {% url 'pybb:add_topic' forum.pk %}
@@ -19,7 +20,9 @@
     {% if form.body %} {% include "pybb/form_field.html" with field=form.body %}  {% endif %}
     <div id='emoticons'>
       {% for smile, url in form.available_smiles.items %}
-        <a href='#' title='{{ smile|safe }}'><img src='{{ STATIC_URL }}{{ form.smiles_prefix }}{{ url }}'></a>
+        {% with form.smiles_prefix|add:'/'|add:url as smile_url %}
+          <a href='#' title='{{ smile|safe }}'><img src="{% static smile_url %}"></a>
+        {% endwith %}
       {% endfor %}
     </div>
 

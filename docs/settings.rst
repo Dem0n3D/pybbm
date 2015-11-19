@@ -134,7 +134,7 @@ Default::
 
 e.g. text  ";)" in post will be replaced to::
 
-    <img src="{{ STATIC_URL }}{{ PYBB_SMILES_PREFIX }}wink.png">
+    <img src="{% static '{{ PYBB_SMILES_PREFIX }}/wink.png' %}">
 
 with default setting.
 
